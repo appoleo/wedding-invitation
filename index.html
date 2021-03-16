@@ -597,11 +597,11 @@
                         background-image: url(./public/photo/17.jpg);"></div>
           <div class="photo-box js-animate animated animation-2000" data-animate="zoomIn" data-time="24000" style="position: absolute;width: 100%;height: 100%;top: 0;left: 0;z-index: 10;
                         background-image: url(./public/photo/13.jpg);"></div>
-          <h4 class="js-animate animated animation-2000" data-animate="myzoomIn" data-time="24000"
+          <!-- <h4 class="js-animate animated animation-2000" data-animate="myzoomIn" data-time="24000"
             style="position: absolute;width: 100%;bottom: 6%;left: 0;z-index: 11;text-align: center;line-height: 28px;">
-            12月25日<br>
+            5月2日<br>
             成都市高新区会展中心
-          </h4>
+          </h4> -->
           <div class="text-frame js-animate animated" data-animate="zoomInLeft" data-time="1000" data-sec="pulseing"
             data-sectime="1000">
           </div>
@@ -616,14 +616,10 @@
         <div id="map"></div>
         <div id="location-btn"><i class="iconfont" style="font-size: 32px;">&#xe616;</i></div>
         <div id="map-msg">
-          <p class="js-animate animated" data-animate="bounceInDown" data-time="0"><i
-              class="iconfont red-icon">&#xe63e;</i>成都市高新区新国际会展中心，距离天府广场约13公里</p>
-          <p class="js-animate animated" data-animate="bounceInLeft" data-time="1000"><i
-              class="iconfont red-icon">&#xe622;</i>天府大道中段转世纪城路</p>
-          <p class="js-animate animated" data-animate="bounceInRight" data-time="2000"><i
-              class="iconfont red-icon">&#xe72b;</i>一号线世纪城站</p>
-          <p class="js-animate animated" data-animate="bounceInUp" data-time="3000"><i
-              class="iconfont red-icon">&#xe636;</i>有任何疑问请致电 新郎&新娘</p>
+	      <p class="js-animate animated" data-animate="bounceInLeft" data-time="0" align="center">꧁༺ 公历5月2日 ༻꧂</p>
+		  <p class="js-animate animated" data-animate="bounceInRight" data-time="1000" align="center">꧁༺ 阴历3月21日 ༻꧂</p>
+          <p class="js-animate animated" data-animate="bounceInDown" data-time="2000" align="center">༒ 西安市鄠邑区罗什村南一街 ༒</p>
+          <p class="js-animate animated" data-animate="bounceInUp" data-time="3000" align="center">ʚ 有任何疑问请致电 新郎&新娘 ɞ</p>
         </div>
       </div>
     </div>
@@ -709,7 +705,7 @@
       function initMap() {
         if (window.BMap) {
           mapFlag = true
-          var mapCenter = [104.083002, 30.5621]
+          var mapCenter = [108.610932,34.076124]
           var map = new BMap.Map("map", { minZoom: 10, maxZoom: 14 })
 
           map.centerAndZoom(new BMap.Point(mapCenter[0], mapCenter[1]), 13);
