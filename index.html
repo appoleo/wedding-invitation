@@ -125,7 +125,7 @@
       loadSum++
     }
 
-    function pcTip() {
+    window.onload = function() {
       if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
         console.log('mobile')
         isMobile = true
@@ -135,7 +135,7 @@
         isMobile = false
         document.getElementById('loading-txt').innerHTML = '请使用手机或其它移动设备打开!'
       }
-    } 
+    }
   </script>
 </head>
 
@@ -143,12 +143,13 @@
   <div id="loading-mask">
     <div class="loading-box">
       <div class="loading"></div>
-      <p id="loading-txt">加载中</p>
+      <p id="loading-txt">所爱隔山海&nbsp;&nbsp;&nbsp;&nbsp;</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;山海俱可平</p>
     </div>
   </div>
   <div id="play-btn"><i class="iconfont" style="font-size: 20px;">&#xe617;</i></div>
-  <img class="load-img" onload="loadDone();pcTip()" src="./public/photo/1.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/2.jpg">
+  <!-- <img class="load-img" onload="loadDone();pcTip()" src="./public/photo/1.jpg"> -->
+  <!-- <img class="load-img" onload="loadDone()" src="./public/photo/2.jpg">
   <img class="load-img" onload="loadDone()" src="./public/photo/3.jpg">
   <img class="load-img" onload="loadDone()" src="./public/photo/4.jpg">
   <img class="load-img" onload="loadDone()" src="./public/photo/6.jpg">
@@ -163,7 +164,7 @@
   <img class="load-img" onload="loadDone()" src="./public/photo/15.jpg">
   <img class="load-img" onload="loadDone()" src="./public/photo/16.jpg">
   <img class="load-img" onload="loadDone()" src="./public/photo/17.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/18.jpg">
+  <img class="load-img" onload="loadDone()" src="./public/photo/18.jpg"> -->
   <div class="wp">
     <div class="wp-inner">
       <div class="page page1">
@@ -622,221 +623,196 @@
           <p class="js-animate animated" data-animate="bounceInUp" data-time="3000" align="center">ʚ 有任何疑问请致电 新郎&新娘 ɞ</p>
 		  <br>
 		  <p></p>
-          <p class="js-animate animated" data-animate="bounceInUp" data-time="3000" align="right">-- created by ami -- </p>
+          <p class="js-animate animated" data-animate="bounceInUp" data-time="3000" align="right"><i>-- created by ami --</i></p>
         </div>
       </div>
     </div>
     <span class="start"><i class="iconfont" style="color: #fff;font-size: 30px;">&#xe606;</i></span>
-    <audio id="mp3" src="./public/music/music.mp3" autoplay loop></audio>
-    <script src="./public/js/js.fullpage.js"></script>
-    <script type="text/javascript"
-      src="https://api.map.baidu.com/api?v=2.0&ak=S6EO9oPso0n8aTMvfH1g0aLUX6vGZx1l"></script>
-    <script>
-	  function loadImage(obj,url,callback){
-	    var img = new Image();
-	    img.src = url;
-	  
-	    // 判断图片是否在缓存中
-	    if(img.complete){
-	        callback.call(img,obj);
-	        return;
-	    }
-	  
-	    // 图片加载到浏览器的缓存中回调函数
-	    img.onload = function(){
-	        callback.call(img,obj);
-	    }
-	  }
-	  
-	  function showImage(obj){
-	      obj.src = this.src;
-	  }
-	  
-	  var imgs = document.querySelectorAll('img');
-	  for(var i = 0;i<imgs.length;i++)
-	  {
-	      var url = imgs[i].dataset.src;
-	      loadImage(imgs[i],url,showImage);
-	  }
-		
-      // 滚屏动画控制
-      if (isMobile !== false) {
-        var loadTimer = setInterval(() => {
-          console.log(loadSum)
-          if (loadSum >= 17) {
-            start()
-          }
-        }, 300);
-      }
+  </div>
+  <audio id="mp3" src="./public/music/music.mp3" autoplay loop></audio>
+  <script src="./public/js/js.fullpage.js"></script>
+  <script type="text/javascript"
+    src="https://api.map.baidu.com/api?v=2.0&ak=S6EO9oPso0n8aTMvfH1g0aLUX6vGZx1l"></script>
+  <script>
+    // 滚屏动画控制
+    if (isMobile !== false) {
+      var loadTimer = setInterval(() => {
+        console.log(loadSum)
+        // if (loadSum >= 1) {
+        //   start()
+        // }
+		start()
+      }, 100);
+    }
 
-      var domLists = []
-      var mapFlag = false
+    var domLists = []
+    var mapFlag = false
 
-      function start() {
-        clearInterval(loadTimer);
+    function start() {
+      clearInterval(loadTimer);
 
-        var forEach = [].forEach;
+      var forEach = [].forEach;
 
-        setTimeout(() => {
-          document.getElementById('loading-mask').style.display = 'none'
-        }, 100);
-        document.getElementsByClassName('wp-inner')[0].fullpage({
-          change: function (e) {
-            clearTime()
-            // 移除动画属性
-            forEach.call(document.querySelectorAll('.page')[e.cur].querySelectorAll('.js-animate'), function (v) {
-              v.classList.add('hide');
-              v.classList.remove(v.dataset['animate']);
-              if (v.dataset['sec']) {
-                v.classList.remove(v.dataset['sec']);
-              }
-            });
-          },
-          afterChange: function (e) {
-            if (e.cur === 5 && !mapFlag) {
-              initMap()
+      setTimeout(() => {
+        document.getElementById('loading-mask').style.display = 'none'
+      }, 100);
+      document.getElementsByClassName('wp-inner')[0].fullpage({
+        change: function (e) {
+          clearTime()
+          // 移除动画属性
+          forEach.call(document.querySelectorAll('.page')[e.cur].querySelectorAll('.js-animate'), function (v) {
+            v.classList.add('hide');
+            v.classList.remove(v.dataset['animate']);
+            if (v.dataset['sec']) {
+              v.classList.remove(v.dataset['sec']);
             }
-
-            domLists = document.querySelectorAll('.page')[e.cur].querySelectorAll('.js-animate')
-            forEach.call(domLists, v => {
-              var time = v.dataset.time;
-              v.timer = setTimeout(function () {
-                v.classList.add(v.dataset['animate']);
-                v.classList.remove('hide');
-                if (v.dataset['sec']) {
-                  var time = v.dataset.sectime || 0
-                  v.sectimer = setTimeout(function () {
-                    v.classList.remove(v.dataset['animate']);
-                    v.classList.add(v.dataset['sec']);
-                  }, time);
-                }
-              }, time);
-            })
-          }
-        });
-      }
-
-      function clearTime() {
-        domLists.forEach((dom, i, arr) => {
-          if (dom.timer) {
-            clearTimeout(dom.timer);
-          }
-          if (dom.sectimer) {
-            clearTimeout(dom.sectimer);
-          }
-          if (arr && arr.splice) {
-            arr.splice(i, 1)
-          }
-        })
-      }
-
-      // 地图
-      function initMap() {
-        if (window.BMap) {
-          mapFlag = true
-          var mapCenter = [108.610932,34.076124]
-          var map = new BMap.Map("map", { minZoom: 10, maxZoom: 14 })
-
-          map.centerAndZoom(new BMap.Point(mapCenter[0], mapCenter[1]), 13);
-
-          function ComplexCustomOverlay(point, text, mouseoverText) {
-            this._point = point;
-            this._text = text;
-            this._overText = mouseoverText;
-          }
-          ComplexCustomOverlay.prototype = new BMap.Overlay();
-          ComplexCustomOverlay.prototype.initialize = function (map) {
-            this._map = map;
-            var div = this._div = document.createElement("div");
-            div.style.position = "absolute";
-            div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
-            div.style.backgroundColor = "#E60000";
-            div.style.borderRadius = "3px";
-            div.style.color = "white";
-            div.style.height = "18px";
-            div.style.padding = "2px 4px";
-            div.style.lineHeight = "18px";
-            div.style.whiteSpace = "nowrap";
-            div.style.MozUserSelect = "none";
-            div.style.fontSize = "12px"
-            var span = this._span = document.createElement("span");
-            div.appendChild(span);
-            span.appendChild(document.createTextNode(this._text));
-            var that = this;
-
-            var arrow = this._arrow = document.createElement("div");
-            // arrow.style.background = "url(http://map.baidu.com/fwmap/upload/r/map/fwmap/static/house/images/label.png) no-repeat";
-            arrow.style.position = "absolute";
-            arrow.style.width = "0";
-            arrow.style.height = "0";
-            arrow.style.top = "22px";
-            arrow.style.left = "10px";
-            arrow.style.overflow = "hidden";
-            arrow.style.border = "6px solid transparent";
-            arrow.style.borderTop = "6px solid #E60000";
-            div.appendChild(arrow);
-
-            map.getPanes().labelPane.appendChild(div);
-
-            return div;
-          }
-          ComplexCustomOverlay.prototype.draw = function () {
-            var map = this._map;
-            var pixel = map.pointToOverlayPixel(this._point);
-            this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
-            this._div.style.top = pixel.y - 30 + "px";
+          });
+        },
+        afterChange: function (e) {
+          if (e.cur === 5 && !mapFlag) {
+            initMap()
           }
 
-          var myCompOverlay = new ComplexCustomOverlay(new BMap.Point(mapCenter[0], mapCenter[1]), "婚礼", "N and Y");
-
-          map.addOverlay(myCompOverlay);
-
-          document.querySelector('#location-btn').addEventListener('click', () => {
-            map.panTo(new BMap.Point(mapCenter[0], mapCenter[1]))
+          domLists = document.querySelectorAll('.page')[e.cur].querySelectorAll('.js-animate')
+          forEach.call(domLists, v => {
+            var time = v.dataset.time;
+            v.timer = setTimeout(function () {
+              v.classList.add(v.dataset['animate']);
+              v.classList.remove('hide');
+              if (v.dataset['sec']) {
+                var time = v.dataset.sectime || 0
+                v.sectimer = setTimeout(function () {
+                  v.classList.remove(v.dataset['animate']);
+                  v.classList.add(v.dataset['sec']);
+                }, time);
+              }
+            }, time);
           })
         }
+      });
+    }
+
+    function clearTime() {
+      domLists.forEach((dom, i, arr) => {
+        if (dom.timer) {
+          clearTimeout(dom.timer);
+        }
+        if (dom.sectimer) {
+          clearTimeout(dom.sectimer);
+        }
+        if (arr && arr.splice) {
+          arr.splice(i, 1)
+        }
+      })
+    }
+
+    // 地图
+    function initMap() {
+      if (window.BMap) {
+        mapFlag = true
+        var mapCenter = [108.610932,34.076124]
+        var map = new BMap.Map("map", { minZoom: 10, maxZoom: 14 })
+
+        map.centerAndZoom(new BMap.Point(mapCenter[0], mapCenter[1]), 13);
+
+        function ComplexCustomOverlay(point, text, mouseoverText) {
+          this._point = point;
+          this._text = text;
+          this._overText = mouseoverText;
+        }
+        ComplexCustomOverlay.prototype = new BMap.Overlay();
+        ComplexCustomOverlay.prototype.initialize = function (map) {
+          this._map = map;
+          var div = this._div = document.createElement("div");
+          div.style.position = "absolute";
+          div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
+          div.style.backgroundColor = "#E60000";
+          div.style.borderRadius = "3px";
+          div.style.color = "white";
+          div.style.height = "18px";
+          div.style.padding = "2px 4px";
+          div.style.lineHeight = "18px";
+          div.style.whiteSpace = "nowrap";
+          div.style.MozUserSelect = "none";
+          div.style.fontSize = "12px"
+          var span = this._span = document.createElement("span");
+          div.appendChild(span);
+          span.appendChild(document.createTextNode(this._text));
+          var that = this;
+
+          var arrow = this._arrow = document.createElement("div");
+          // arrow.style.background = "url(http://map.baidu.com/fwmap/upload/r/map/fwmap/static/house/images/label.png) no-repeat";
+          arrow.style.position = "absolute";
+          arrow.style.width = "0";
+          arrow.style.height = "0";
+          arrow.style.top = "22px";
+          arrow.style.left = "10px";
+          arrow.style.overflow = "hidden";
+          arrow.style.border = "6px solid transparent";
+          arrow.style.borderTop = "6px solid #E60000";
+          div.appendChild(arrow);
+
+          map.getPanes().labelPane.appendChild(div);
+
+          return div;
+        }
+        ComplexCustomOverlay.prototype.draw = function () {
+          var map = this._map;
+          var pixel = map.pointToOverlayPixel(this._point);
+          this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
+          this._div.style.top = pixel.y - 30 + "px";
+        }
+
+        var myCompOverlay = new ComplexCustomOverlay(new BMap.Point(mapCenter[0], mapCenter[1]), "婚礼", "N and Y");
+
+        map.addOverlay(myCompOverlay);
+
+        document.querySelector('#location-btn').addEventListener('click', () => {
+          map.panTo(new BMap.Point(mapCenter[0], mapCenter[1]))
+        })
+      }
+    }
+
+    // 音乐播放控制
+    window.onload = function () {
+      let mp3 = document.querySelector('#mp3')
+      let playBtn = document.querySelector('#play-btn')
+      let play
+
+      mp3.load()
+
+      document.addEventListener("WeixinJSBridgeReady", function () {
+        mp3.play()
+        if (!mp3.paused) {
+          this.style.animationPlayState = 'running'
+          mp3.play()
+          play = true
+        }
+      }, false)
+
+      play = !mp3.paused && mp3.readyState === 4
+
+      if (play) {
+        playBtn.style.animationPlayState = 'running'
+      } else {
+        playBtn.style.animationPlayState = 'paused'
       }
 
-      // 音乐播放控制
-      window.onload = function () {
-        let mp3 = document.querySelector('#mp3')
-        let playBtn = document.querySelector('#play-btn')
-        let play
-
-        mp3.load()
-
-        document.addEventListener("WeixinJSBridgeReady", function () {
-          mp3.play()
-          if (!mp3.paused) {
+      playBtn.addEventListener('click', function (event) {
+        if (play) {
+          this.style.animationPlayState = 'paused'
+          mp3.pause()
+          play = false
+        } else {
+          if (mp3.readyState === 4) {
             this.style.animationPlayState = 'running'
             mp3.play()
             play = true
           }
-        }, false)
-
-        play = !mp3.paused && mp3.readyState === 4
-
-        if (play) {
-          playBtn.style.animationPlayState = 'running'
-        } else {
-          playBtn.style.animationPlayState = 'paused'
         }
-
-        playBtn.addEventListener('click', function (event) {
-          if (play) {
-            this.style.animationPlayState = 'paused'
-            mp3.pause()
-            play = false
-          } else {
-            if (mp3.readyState === 4) {
-              this.style.animationPlayState = 'running'
-              mp3.play()
-              play = true
-            }
-          }
-        })
-      }
-    </script>
+      })
+    }
+  </script>
 </body>
 
 </html>
