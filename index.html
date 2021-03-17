@@ -612,10 +612,16 @@
         <div class="ele-wrap">
         </div>
       </div>
-      <div class="page page6" style="position: relative;">
-        <div id="map"></div>
-        <div id="location-btn"><i class="iconfont" style="font-size: 32px;">&#xe616;</i></div>
-        <div id="map-msg">
+      <div class="page page6">
+        <!-- <div id="map"></div>
+        <div id="location-btn"><i class="iconfont" style="font-size: 32px;">&#xe616;</i></div> -->
+		<div>
+		  <p class="js-animate animated" data-animate="bounceInLeft" data-time="0" align="center">1</p>
+		  <p class="js-animate animated" data-animate="bounceInLeft" data-time="1000" align="center">2</p>
+		  <p class="js-animate animated" data-animate="bounceInLeft" data-time="2000" align="center">3</p>
+		  <p class="js-animate animated" data-animate="bounceInLeft" data-time="3000" align="center">4</p>
+		</div>
+        <div id="map-msg" style="position:absolute;bottom:0;width: 100%;">
 	      <p class="js-animate animated" data-animate="bounceInLeft" data-time="0" align="center">꧁༺ 公历5月2日 ༻꧂</p>
 		  <p class="js-animate animated" data-animate="bounceInRight" data-time="1000" align="center">꧁༺ 阴历3月21日 ༻꧂</p>
           <p class="js-animate animated" data-animate="bounceInDown" data-time="2000" align="center">༒ 西安市鄠邑区罗什村南一街 ༒</p>
@@ -630,8 +636,8 @@
   </div>
   <audio id="mp3" src="./public/music/music.mp3" autoplay loop></audio>
   <script src="./public/js/js.fullpage.js"></script>
-  <script type="text/javascript"
-    src="https://api.map.baidu.com/api?type=webgl&v=1.0&ak=S6EO9oPso0n8aTMvfH1g0aLUX6vGZx1l"></script>
+  <!-- <script type="text/javascript"
+    src="https://api.map.baidu.com/api?v=2.0&ak=S6EO9oPso0n8aTMvfH1g0aLUX6vGZx1l"></script> -->
   <script>
     // 滚屏动画控制
     if (isMobile !== false) {
@@ -668,9 +674,9 @@
           });
         },
         afterChange: function (e) {
-          if (e.cur === 5 && !mapFlag) {
-            initMap()
-          }
+          // if (e.cur === 5 && !mapFlag) {
+          //   initMap()
+          // }
 
           domLists = document.querySelectorAll('.page')[e.cur].querySelectorAll('.js-animate')
           forEach.call(domLists, v => {
@@ -707,29 +713,24 @@
 
     // 地图
     function initMap() {
-      if (window.BMapGL) {
-		console.log("init map")
+      if (window.BMap) {
         mapFlag = true
- 
-		var map = new BMapGL.Map("map"); // 创建Map实例
-		var mapCenter = [108.610932,34.076124]
-		var point = new BMapGL.Point(mapCenter[0],mapCenter[1]); // 创建点坐标
-		map.centerAndZoom(point, 13);
-		// var myCompOverlay = new ComplexCustomOverlay(new BMapGL.Point(mapCenter[0], mapCenter[1]), "婚礼", "N and Y");
-		// map.addOverlay(myCompOverlay);
-		map.enableScrollWheelZoom(); // 启用滚轮放大缩小
- 
+        var mapCenter = [108.610932,34.076124]
+        var map = new BMap.Map("map", { minZoom: 10, maxZoom: 14 })
+
+        map.centerAndZoom(new BMap.Point(mapCenter[0], mapCenter[1]), 13);
+
         function ComplexCustomOverlay(point, text, mouseoverText) {
           this._point = point;
           this._text = text;
           this._overText = mouseoverText;
         }
-        ComplexCustomOverlay.prototype = new BMapGL.Overlay();
+        ComplexCustomOverlay.prototype = new BMap.Overlay();
         ComplexCustomOverlay.prototype.initialize = function (map) {
           this._map = map;
           var div = this._div = document.createElement("div");
           div.style.position = "absolute";
-          div.style.zIndex = BMapGL.Overlay.getZIndex(this._point.lat);
+          div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
           div.style.backgroundColor = "#E60000";
           div.style.borderRadius = "3px";
           div.style.color = "white";
@@ -767,18 +768,15 @@
           this._div.style.top = pixel.y - 30 + "px";
         }
 
-        var myCompOverlay = new ComplexCustomOverlay(new BMapGL.Point(mapCenter[0], mapCenter[1]), "婚礼", "N and Y");
+        var myCompOverlay = new ComplexCustomOverlay(new BMap.Point(mapCenter[0], mapCenter[1]), "婚礼", "N and Y");
 
         map.addOverlay(myCompOverlay);
-		console.log("add init point listener")
+
         document.querySelector('#location-btn').addEventListener('click', () => {
-		  console.log("init point")
-          map.panTo(new BMapGL.Point(mapCenter[0], mapCenter[1]))
+          map.panTo(new BMap.Point(mapCenter[0], mapCenter[1]))
         })
       }
     }
-	
-	
 
     // 音乐播放控制
     window.onload = function () {
