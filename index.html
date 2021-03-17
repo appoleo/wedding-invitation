@@ -143,12 +143,11 @@
   <div id="loading-mask" onload="pcTip()">
     <div class="loading-box">
       <div class="loading"></div>
-      <p id="loading-txt">所爱隔山海&nbsp;&nbsp;&nbsp;&nbsp;</p>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;山海俱可平</p>
+      <p id="loading-txt">所爱隔山海&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;山海俱可平</p>
     </div>
   </div>
   <div id="play-btn"><i class="iconfont" style="font-size: 20px;">&#xe617;</i></div>
-  <img class="load-img" onload="loadDone();pcTip()" src="./public/photo/1.jpg">
+  <img class="load-img" onload="pcTip();loadDone()" src="./public/photo/1.jpg">
   <!-- <img class="load-img" onload="loadDone()" src="./public/photo/2.jpg">
   <img class="load-img" onload="loadDone()" src="./public/photo/3.jpg">
   <img class="load-img" onload="loadDone()" src="./public/photo/4.jpg">
@@ -642,7 +641,7 @@
           start()
         }
 		// start()
-      }, 100);
+      }, 200);
     }
 
     var domLists = []
