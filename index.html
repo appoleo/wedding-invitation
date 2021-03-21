@@ -656,8 +656,7 @@
     if (isMobile !== false) {
       var loadTimer = setInterval(() => {
         console.log(loadSum)
-        if (loadSum >= 1 && !mp3.paused) {
-		  playBtn.style.animationPlayState = 'running'
+        if (loadSum >= 1) {
           start()
 		  clearInterval(loadTimer)
         }
