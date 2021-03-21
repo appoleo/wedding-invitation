@@ -660,7 +660,7 @@
 		  clearInterval(loadTimer)
         }
 		// start()
-      }, 200);
+      }, 100);
     }
 
     var domLists = []
@@ -804,14 +804,14 @@
 		  return;
 	  }
 
-      document.addEventListener("WeixinJSBridgeReady", function () {
-        mp3.play()
-        if (!mp3.paused) {
-          this.style.animationPlayState = 'running'
-          mp3.play()
-          play = true
-        }
-      }, false)
+      // document.addEventListener("WeixinJSBridgeReady", function () {
+      //   mp3.play()
+      //   if (!mp3.paused) {
+      //     this.style.animationPlayState = 'running'
+      //     mp3.play()
+      //     play = true
+      //   }
+      // }, false)
 
       play = !mp3.paused
 
