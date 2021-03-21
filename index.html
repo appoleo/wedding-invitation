@@ -150,7 +150,7 @@
       <h4 id="loading-txt">loading...</h4>
     </div>
   </div>
- 
+  <audio id="mp3" src="./public/music/music.mp3" autoplay loop></audio>
   <div id="play-btn"><i class="iconfont" style="font-size: 20px;">&#xe617;</i></div>
   <img style="display: none;" class="load-img" onload="pcTip();loadDone()" src="./public/photo/1.jpg">
   <!-- <img class="load-img" onload="loadDone()" src="./public/photo/2.jpg">
@@ -643,7 +643,7 @@
     </div>
     <span class="start"><i class="iconfont" style="color: #fff;font-size: 30px;">&#xe606;</i></span>
   </div>
-  <audio id="mp3" src="./public/music/music.mp3" autoplay loop></audio>
+ 
   <script src="./public/js/js.fullpage.js"></script>
   <!-- <script type="text/javascript"
     src="https://api.map.baidu.com/api?v=2.0&ak=S6EO9oPso0n8aTMvfH1g0aLUX6vGZx1l"></script> -->
@@ -805,14 +805,14 @@
 		  return;
 	  }
 
-      // document.addEventListener("WeixinJSBridgeReady", function () {
-      //   mp3.play()
-      //   if (!mp3.paused) {
-      //     this.style.animationPlayState = 'running'
-      //     mp3.play()
-      //     play = true
-      //   }
-      // }, false)
+      document.addEventListener("WeixinJSBridgeReady", function () {
+        mp3.play()
+        if (!mp3.paused) {
+          this.style.animationPlayState = 'running'
+          mp3.play()
+          play = true
+        }
+      }, false)
 
       play = !mp3.paused
 	  
