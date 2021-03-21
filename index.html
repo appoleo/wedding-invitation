@@ -816,6 +816,13 @@
       // }, false)
 
       play = !mp3.paused
+	  
+	  var musicTimer = setInterval(() => {
+	    if (!mp3.paused) {
+	  		  playBtn.style.animationPlayState = 'running'
+	  		  clearInterval(loadTimer)
+	    }
+	  }, 100);
 
       playBtn.addEventListener('click', function (event) {
         if (play) {
