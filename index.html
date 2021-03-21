@@ -124,17 +124,20 @@
     function loadDone() {
       loadSum++
     }
+	
+	if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+	  console.log('mobile')
+	  isMobile = true
+	} else {
+	  console.log('pc')
+	  isMobile = false
+	}
 
     function pcTip() {
-      if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
-        console.log('mobile')
-        isMobile = true
-      } else {
-        console.log('pc')
-        loadSum = -1
-        isMobile = false
-        document.getElementById('loading-txt').innerHTML = '请使用手机或其它移动设备打开!'
-      }
+	  if (!isMobile) {
+		  loadSum = -1
+		  document.getElementById('loading-txt').innerHTML = '请使用手机或其它移动设备打开!'
+	  }
     }
   </script>
 </head>
@@ -612,23 +615,22 @@
         <div class="ele-wrap">
         </div>
       </div>
-      <div class="page page6">
+      <div class="page page6" >
         <!-- <div id="map"></div>
         <div id="location-btn"><i class="iconfont" style="font-size: 32px;">&#xe616;</i></div> -->
 		<div class="photo-wrap">
 		  <div class="full-bg js-animate animated animation-5000"
-		    style="background-image: url(./public/photo/7.jpg);width: 100%;height: 65%;" data-animate="fadeInDown"
+		    style="background-image: url(./public/photo/7.jpg);width: 100%;height: 100%;" data-animate="fadeInDown"
 		    data-sectime="12000" data-sec="slideOutUp" data-time="0">
 		  </div>
-		
 		</div>
-		<h4 class="js-animate animated animation-500" data-time="10000" 
-		  style="position: absolute;top: 10%;width: 100%;text-align: center;">
+		<h4 class="js-animate animated animation-500" data-time="10000"
+		  style="position: absolute;top: 20%;width: 100%;text-align: center;background-color: palevioletred;height: 100;">
 		  此爱翻山海&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;山海俱可平
 		</h4>
         <div class="ele-wrap" style="position:absolute;top:65%;bottom:0;width: 100%;">
-	      <p class="js-animate animated" data-animate="bounceInLeft" data-time="3000" align="center">꧁༺ 公历5月2日 ༻꧂</p>
-		  <p class="js-animate animated" data-animate="bounceInRight" data-time="4000" align="center">꧁༺ 阴历3月21日 ༻꧂</p>
+	      <p class="js-animate animated" data-animate="bounceInLeft" data-time="3000" align="center">༺ 公历5月2日 ༻</p>
+		  <p class="js-animate animated" data-animate="bounceInRight" data-time="4000" align="center">༺ 阴历3月21日 ༻</p>
           <p class="js-animate animated" data-animate="bounceInDown" data-time="5000" align="center">༒ 西安市鄠邑区罗什村南一街 ༒</p>
           <p class="js-animate animated" data-animate="bounceInUp" data-time="6000" align="center">ʚ 有任何疑问请致电 新郎&新娘 ɞ</p>
 		  <br>
@@ -645,11 +647,13 @@
     src="https://api.map.baidu.com/api?v=2.0&ak=S6EO9oPso0n8aTMvfH1g0aLUX6vGZx1l"></script> -->
   <script>
     // 滚屏动画控制
+	console.log(isMobile);
     if (isMobile !== false) {
       var loadTimer = setInterval(() => {
         console.log(loadSum)
         if (loadSum >= 1) {
           start()
+		  clearInterval(loadTimer)
         }
 		// start()
       }, 200);
@@ -787,9 +791,15 @@
     window.onload = function () {
       let mp3 = document.querySelector('#mp3')
       let playBtn = document.querySelector('#play-btn')
-      let play
+      let play = true
 
       mp3.load()
+	  
+	  if(!isMobile) {
+		  mp3.pause()
+		  play = false
+		  return;
+	  }
 
       document.addEventListener("WeixinJSBridgeReady", function () {
         mp3.play()
@@ -799,8 +809,6 @@
           play = true
         }
       }, false)
-
-      play = !mp3.paused && mp3.readyState === 4
 
       if (play) {
         playBtn.style.animationPlayState = 'running'
