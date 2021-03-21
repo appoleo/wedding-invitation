@@ -648,12 +648,14 @@
   <!-- <script type="text/javascript"
     src="https://api.map.baidu.com/api?v=2.0&ak=S6EO9oPso0n8aTMvfH1g0aLUX6vGZx1l"></script> -->
   <script>
+	let play
     // 滚屏动画控制
 	console.log(isMobile);
+	let mp3 = document.querySelector('#mp3')
     if (isMobile !== false) {
       var loadTimer = setInterval(() => {
         console.log(loadSum)
-        if (loadSum >= 1) {
+        if (loadSum >= 1 && !mp3.paused) {
           start()
 		  clearInterval(loadTimer)
         }
@@ -791,11 +793,10 @@
 
     // 音乐播放控制
     window.onload = function () {
-      let mp3 = document.querySelector('#mp3')
+      // let mp3 = document.querySelector('#mp3')
       let playBtn = document.querySelector('#play-btn')
-      let play = true
 
-      mp3.load()
+      // mp3.load()
 	  
 	  if(!isMobile) {
 		  mp3.pause()
@@ -811,6 +812,8 @@
           play = true
         }
       }, false)
+
+      play = !mp3.paused
 
       if (play) {
         playBtn.style.animationPlayState = 'running'
