@@ -150,7 +150,7 @@
       <h4 id="loading-txt">loading...</h4>
     </div>
   </div>
-  <audio id="mp3" src="./public/music/music.mp3" preload="auto" autoplay loop></audio>
+  <audio id="mp3" src="./public/music/music.mp3" autoplay loop></audio>
   <div id="play-btn"><i class="iconfont" style="font-size: 20px;">&#xe617;</i></div>
   <img style="display: none;" class="load-img" onload="pcTip();loadDone()" src="./public/photo/1.jpg">
   <!-- <img class="load-img" onload="loadDone()" src="./public/photo/2.jpg">
@@ -656,7 +656,8 @@
     if (isMobile !== false) {
       var loadTimer = setInterval(() => {
         console.log(loadSum)
-        if (loadSum >= 1) {
+        if (loadSum >= 1 && !mp3.paused) {
+		  playBtn.style.animationPlayState = 'running'
           start()
 		  clearInterval(loadTimer)
         }
@@ -815,13 +816,6 @@
       }, false)
 
       play = !mp3.paused
-	  
-	  var musicTimer = setInterval(() => {
-	    if (!mp3.paused) {
-	  		  playBtn.style.animationPlayState = 'running'
-	  		  clearInterval(loadTimer)
-	    }
-	  }, 100);
 
       playBtn.addEventListener('click', function (event) {
         if (play) {
