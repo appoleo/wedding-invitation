@@ -656,6 +656,7 @@
       var loadTimer = setInterval(() => {
         console.log(loadSum)
         if (loadSum >= 1 && !mp3.paused) {
+		  playBtn.style.animationPlayState = 'running'
           start()
 		  clearInterval(loadTimer)
         }
@@ -814,12 +815,6 @@
       // }, false)
 
       play = !mp3.paused
-
-      if (play) {
-        playBtn.style.animationPlayState = 'running'
-      } else {
-        playBtn.style.animationPlayState = 'paused'
-      }
 
       playBtn.addEventListener('click', function (event) {
         if (play) {
