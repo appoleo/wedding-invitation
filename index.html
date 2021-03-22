@@ -634,20 +634,6 @@
     // 滚屏动画控制
 	let playBtn = document.querySelector('#play-btn')
 	let mp3 = document.querySelector('#mp3')
-	
-	document.addEventListener("WeixinJSBridgeReady", function () {
-	  console.log("weixin ready...")
-	  if (mp3.paused) {
-		  mp3.play()
-	  }
-	  
-	  if (!mp3.paused) {
-	    this.style.animationPlayState = 'running'
-	    // mp3.play()
-	    play = true
-	  }
-	}, false)
-	
     if (isMobile) {
       var loadTimer = setInterval(() => {
         console.log(loadSum)
@@ -662,12 +648,9 @@
 
     function start() {
       clearInterval(loadTimer);
-	  if (mp3.paused) {
-	    mp3.play()
-		playBtn.style.animationPlayState = 'running'
-		play = true
-	  }
-	  
+	  mp3.play()
+	  playBtn.style.animationPlayState = 'running'
+	  play = true
       var forEach = [].forEach;
 	  document.getElementById('loading-mask').style.display = 'none'
       // setTimeout(() => {
@@ -747,7 +730,15 @@
 		  return;
 	  }
 
-      
+      document.addEventListener("WeixinJSBridgeReady", function () {
+		console.log("weixin ready...")
+        mp3.play()
+        if (!mp3.paused) {
+          this.style.animationPlayState = 'running'
+          // mp3.play()
+          play = true
+        }
+      }, false)
 
       mp3.addEventListener("canplay", function() {
         // 音频可以播放了
