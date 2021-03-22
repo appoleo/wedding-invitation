@@ -631,8 +631,6 @@
   <script>
 	let play
     // 滚屏动画控制
-	console.log(isMobile);
-	let mp3 = document.querySelector('#mp3')
 	let playBtn = document.querySelector('#play-btn')
     if (isMobile !== false) {
       var loadTimer = setInterval(() => {
@@ -642,7 +640,7 @@
           start()
         }
 		// start()
-      }, 300);
+      }, 200);
     }
 
     var domLists = []
@@ -704,7 +702,7 @@
 
     // 音乐播放控制
     window.onload = function () {
-      // let mp3 = document.querySelector('#mp3')
+      let mp3 = document.querySelector('#mp3')
       
       mp3.load()
 	  
@@ -715,10 +713,11 @@
 	  }
 
       document.addEventListener("WeixinJSBridgeReady", function () {
+		console.log("weixin ready...")
         mp3.play()
         if (!mp3.paused) {
           this.style.animationPlayState = 'running'
-          mp3.play()
+          // mp3.play()
           play = true
         }
       }, false)
