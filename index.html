@@ -135,7 +135,7 @@
 
     function pcTip() {
 	  if (!isMobile) {
-		  loadSum = -1
+		  loadSum -= 1
 		  document.getElementById('loading-txt').innerHTML = '请使用手机或其它移动设备打开!'
 	  }
     }
@@ -150,7 +150,7 @@
       <h4 id="loading-txt">loading...</h4>
     </div>
   </div>
-  <audio id="mp3" src="https://wedding.appoleo.xyz/public/music/music.mp3" autoplay loop></audio>
+  
   <div id="play-btn"><i class="iconfont" style="font-size: 20px;">&#xe617;</i></div>
   <img style="display: none;" class="load-img" onload="pcTip();loadDone()" src="./public/photo/1.jpg">
   <div class="wp">
@@ -625,19 +625,20 @@
     </div>
     <span class="start"><i class="iconfont" style="color: #fff;font-size: 30px;">&#xe606;</i></span>
   </div>
- 
+  <audio id="mp3" src="./public/music/music.mp3" autoplay loop></audio>
   <script src="./public/js/js.fullpage.js"></script>
 
   <script>
 	let play
     // 滚屏动画控制
 	let playBtn = document.querySelector('#play-btn')
-    if (isMobile !== false) {
+    if (isMobile) {
       var loadTimer = setInterval(() => {
         console.log(loadSum)
         if (loadSum >= 1) {
 		  playBtn.style.animationPlayState = 'running'
           start()
+		  play = true;
         }
 		// start()
       }, 200);
@@ -649,10 +650,11 @@
       clearInterval(loadTimer);
 
       var forEach = [].forEach;
-
-      setTimeout(() => {
-        document.getElementById('loading-mask').style.display = 'none'
-      }, 100);
+	  document.getElementById('loading-mask').style.display = 'none'
+      // setTimeout(() => {
+      //   document.getElementById('loading-mask').style.display = 'none'
+      // }, 100);
+	  
       document.getElementsByClassName('wp-inner')[0].fullpage({
         change: function (e) {
           clearTime()
@@ -699,6 +701,21 @@
         }
       })
     }
+	
+	let mp3 = document.querySelector('#mp3')
+	playBtn.addEventListener('click', function (event) {
+	  if (play) {
+	    this.style.animationPlayState = 'paused'
+	    mp3.pause()
+	    play = false
+	  } else {
+	    if (mp3.readyState === 4) {
+	      this.style.animationPlayState = 'running'
+	      mp3.play()
+	      play = true
+	    }
+	  }
+	})
 
     // 音乐播放控制
     /* window.onload = function () {
