@@ -153,22 +153,6 @@
   <audio id="mp3" src="./public/music/music.mp3" autoplay loop></audio>
   <div id="play-btn"><i class="iconfont" style="font-size: 20px;">&#xe617;</i></div>
   <img style="display: none;" class="load-img" onload="pcTip();loadDone()" src="./public/photo/1.jpg">
-  <!-- <img class="load-img" onload="loadDone()" src="./public/photo/2.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/3.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/4.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/6.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/7.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/8.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/9.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/10.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/11.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/12.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/13.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/14.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/15.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/16.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/17.jpg">
-  <img class="load-img" onload="loadDone()" src="./public/photo/18.jpg"> -->
   <div class="wp">
     <div class="wp-inner">
       <div class="page page1">
@@ -618,8 +602,6 @@
         </div>
       </div>
       <div class="page page6" >
-        <!-- <div id="map"></div>
-        <div id="location-btn"><i class="iconfont" style="font-size: 32px;">&#xe616;</i></div> -->
 		<div class="photo-wrap">
 		  <div class="full-bg js-animate animated animation-5000"
 		    style="background-image: url(./public/photo/7.jpg);width: 100%;height: 100%;" data-animate="fadeInDown"
@@ -645,8 +627,7 @@
   </div>
  
   <script src="./public/js/js.fullpage.js"></script>
-  <!-- <script type="text/javascript"
-    src="https://api.map.baidu.com/api?v=2.0&ak=S6EO9oPso0n8aTMvfH1g0aLUX6vGZx1l"></script> -->
+
   <script>
 	let play
     // 滚屏动画控制
@@ -656,17 +637,16 @@
     if (isMobile !== false) {
       var loadTimer = setInterval(() => {
         console.log(loadSum)
-        if (loadSum >= 1 && !mp3.paused) {
+        if (loadSum >= 1 && play) {
 		  playBtn.style.animationPlayState = 'running'
           start()
 		  clearInterval(loadTimer)
         }
 		// start()
-      }, 100);
+      }, 300);
     }
 
     var domLists = []
-    var mapFlag = false
 
     function start() {
       clearInterval(loadTimer);
@@ -689,9 +669,6 @@
           });
         },
         afterChange: function (e) {
-          // if (e.cur === 5 && !mapFlag) {
-          //   initMap()
-          // }
 
           domLists = document.querySelectorAll('.page')[e.cur].querySelectorAll('.js-animate')
           forEach.call(domLists, v => {
@@ -726,80 +703,11 @@
       })
     }
 
-    // 地图
-    function initMap() {
-      if (window.BMap) {
-        mapFlag = true
-        var mapCenter = [108.610932,34.076124]
-        var map = new BMap.Map("map", { minZoom: 10, maxZoom: 14 })
-
-        map.centerAndZoom(new BMap.Point(mapCenter[0], mapCenter[1]), 13);
-
-        function ComplexCustomOverlay(point, text, mouseoverText) {
-          this._point = point;
-          this._text = text;
-          this._overText = mouseoverText;
-        }
-        ComplexCustomOverlay.prototype = new BMap.Overlay();
-        ComplexCustomOverlay.prototype.initialize = function (map) {
-          this._map = map;
-          var div = this._div = document.createElement("div");
-          div.style.position = "absolute";
-          div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
-          div.style.backgroundColor = "#E60000";
-          div.style.borderRadius = "3px";
-          div.style.color = "white";
-          div.style.height = "18px";
-          div.style.padding = "2px 4px";
-          div.style.lineHeight = "18px";
-          div.style.whiteSpace = "nowrap";
-          div.style.MozUserSelect = "none";
-          div.style.fontSize = "12px"
-          var span = this._span = document.createElement("span");
-          div.appendChild(span);
-          span.appendChild(document.createTextNode(this._text));
-          var that = this;
-
-          var arrow = this._arrow = document.createElement("div");
-          // arrow.style.background = "url(http://map.baidu.com/fwmap/upload/r/map/fwmap/static/house/images/label.png) no-repeat";
-          arrow.style.position = "absolute";
-          arrow.style.width = "0";
-          arrow.style.height = "0";
-          arrow.style.top = "22px";
-          arrow.style.left = "10px";
-          arrow.style.overflow = "hidden";
-          arrow.style.border = "6px solid transparent";
-          arrow.style.borderTop = "6px solid #E60000";
-          div.appendChild(arrow);
-
-          map.getPanes().labelPane.appendChild(div);
-
-          return div;
-        }
-        ComplexCustomOverlay.prototype.draw = function () {
-          var map = this._map;
-          var pixel = map.pointToOverlayPixel(this._point);
-          this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
-          this._div.style.top = pixel.y - 30 + "px";
-        }
-
-        var myCompOverlay = new ComplexCustomOverlay(new BMap.Point(mapCenter[0], mapCenter[1]), "婚礼", "N and Y");
-
-        map.addOverlay(myCompOverlay);
-
-        document.querySelector('#location-btn').addEventListener('click', () => {
-          map.panTo(new BMap.Point(mapCenter[0], mapCenter[1]))
-        })
-      }
-    }
-
     // 音乐播放控制
     window.onload = function () {
       // let mp3 = document.querySelector('#mp3')
       
-
       mp3.load()
-	  mp3.play()
 	  
 	  if(!isMobile) {
 		  mp3.pause()
@@ -816,7 +724,11 @@
         }
       }, false)
 
-      play = !mp3.paused
+      mp3.addEventListener("canplay", function() {
+        // 音频可以播放了
+		mp3.play()
+		play = true;
+      });
 
       playBtn.addEventListener('click', function (event) {
         if (play) {
