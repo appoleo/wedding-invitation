@@ -648,9 +648,14 @@
 
     function start() {
       clearInterval(loadTimer);
-	  mp3.play()
-	  playBtn.style.animationPlayState = 'running'
-	  play = true
+	  try {
+		  mp3.play()
+		  playBtn.style.animationPlayState = 'running'
+		  play = true
+	  } catch (err) {
+		  this.style.animationPlayState = 'paused'
+		  play = false
+	  }
       var forEach = [].forEach;
 	  document.getElementById('loading-mask').style.display = 'none'
       // setTimeout(() => {
