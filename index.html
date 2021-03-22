@@ -143,7 +143,7 @@
 </head>
 
 <body>
-
+  <audio id="mp3" src="./public/music/music.mp3" autoplay loop></audio>
   <div id="loading-mask">
     <div class="loading-box">
       <div class="loading"></div>
@@ -152,7 +152,7 @@
   </div>
   
   <div id="play-btn"><i class="iconfont" style="font-size: 20px;">&#xe617;</i></div>
-  <img style="display: none;" class="load-img" onload="pcTip();loadDone()" src="./public/photo/1.jpg">
+  <img style="display: none;" class="load-img" onload="loadDone();pcTip()" src="./public/photo/1.jpg">
   <div class="wp">
     <div class="wp-inner">
       <div class="page page1">
@@ -625,7 +625,7 @@
     </div>
     <span class="start"><i class="iconfont" style="color: #fff;font-size: 30px;">&#xe606;</i></span>
   </div>
-  <audio id="mp3" src="./public/music/music.mp3" autoplay loop></audio>
+  
   <script src="./public/js/js.fullpage.js"></script>
 
   <script>
