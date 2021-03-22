@@ -150,7 +150,7 @@
       <h4 id="loading-txt">loading...</h4>
     </div>
   </div>
-  <audio id="mp3" src="./public/music/music.mp3" autoplay loop></audio>
+  <audio id="mp3" src="https://wedding.appoleo.xyz/public/music/music.mp3" autoplay loop></audio>
   <div id="play-btn"><i class="iconfont" style="font-size: 20px;">&#xe617;</i></div>
   <img style="display: none;" class="load-img" onload="pcTip();loadDone()" src="./public/photo/1.jpg">
   <div class="wp">
@@ -637,10 +637,9 @@
     if (isMobile !== false) {
       var loadTimer = setInterval(() => {
         console.log(loadSum)
-        if (loadSum >= 1 && play) {
+        if (loadSum >= 1) {
 		  playBtn.style.animationPlayState = 'running'
           start()
-		  clearInterval(loadTimer)
         }
 		// start()
       }, 300);
@@ -726,7 +725,7 @@
 
       mp3.addEventListener("canplay", function() {
         // 音频可以播放了
-		mp3.play()
+		// mp3.play()
 		play = true;
       });
 
